@@ -1,0 +1,71 @@
+<div class="main-cake">
+  <!-- Left Slider -->
+  <div class="slider-container left-slider">
+    <div class="slider-track" #leftSlider [class.loaded]="imagesLoaded">
+      <div class="slider-item-container" *ngFor="let image of imageUrls">
+        <img
+          [src]="image"
+          class="slider-item"
+          (load)="onImageLoad()"
+          [style.opacity]="imagesLoaded ? '1' : '0'"
+        />
+        <div class="slider-item-placeholder" *ngIf="!imagesLoaded"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Slider -->
+  <div class="slider-container right-slider">
+    <div class="slider-track" #rightSlider [class.loaded]="imagesLoaded">
+      <div
+        class="slider-item-container"
+        *ngFor="let image of reversedImageUrls"
+      >
+        <img
+          [src]="image"
+          class="slider-item"
+          (load)="onImageLoad()"
+          [style.opacity]="imagesLoaded ? '1' : '0'"
+        />
+        <div class="slider-item-placeholder" *ngIf="!imagesLoaded"></div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="heading">Let's Cut the Cake! 🎂</h1>
+  <p class="head2">Make a wish 🙏 and Blow the Candle 🕯️</p>
+  <div class="cake-container">
+    <div class="cake">
+      <div class="layer layer-1">
+        <div class="frosting"></div>
+        <div class="frosting" style="left: 40px"></div>
+        <div class="frosting" style="right: 40px"></div>
+      </div>
+      <div class="layer layer-2">
+        <div class="frosting"></div>
+        <div class="frosting" style="left: 35px"></div>
+        <div class="frosting" style="right: 35px"></div>
+      </div>
+      <div class="layer layer-3">
+        <div class="frosting"></div>
+        <div class="frosting" style="left: 30px"></div>
+        <div class="frosting" style="right: 30px"></div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add this right after your cake-container div -->
+  <div class="scrolling-words-container">
+    <div class="scrolling-words" #scrollingWords>
+      <span *ngFor="let phrase of phrases">{{ phrase }}</span>
+    </div>
+    <div class="scrolling-words" #scrollingWordsClone>
+      <span *ngFor="let phrase of phrases">{{ phrase }}</span>
+    </div>
+  </div>
+  <button class="next-page-button" (click)="goToFinalPage()">
+    Greeting with all the ♥️
+  </button>
+</div>

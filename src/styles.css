@@ -1,0 +1,23 @@
+/* src/styles.css or src/styles.scss */
+
+/* For modern browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* For IE and Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Ensure scrolling still works */
+html,
+body {
+  overflow-y: auto;
+  height: 100%;
+}
