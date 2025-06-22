@@ -1,34 +1,39 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AudioService {
-  private audio: HTMLAudioElement;
+  private audio: HTMLAudioElement | null = null;
   private wasPlaying = false;
 
-  constructor() {
-    // Initialize audio
-    this.audio = new Audio('/assets/audio/thoda_thoda.mp3');
-    this.audio.loop = true;
-    this.audio.volume = 0.3; // 30% volume
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    // Only initialize audio in browser environment
+    if (isPlatformBrowser(this.platformId)) {
+      this.audio = new Audio('/assets/audio/thoda_thoda.mp3');
+      this.audio.loop = true;
+      this.audio.volume = 0.5; // 30% volume
 
-    // Restore playback state if page refreshes
-    this.wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
+      // Restore playback state if page refreshes
+      this.wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
 
-    // Handle browser autoplay policies
-    document.addEventListener('click', this.initAudio.bind(this), {
-      once: true,
-    });
+      // Handle browser autoplay policies
+      document.addEventListener('click', this.initAudio.bind(this), {
+        once: true,
+      });
+    }
   }
 
   private initAudio(): void {
-    if (this.wasPlaying) {
+    if (this.wasPlaying && this.audio) {
       this.play();
     }
   }
 
   play(): void {
+    if (!this.audio) return;
+
     this.audio
       .play()
       .then(() => {
@@ -40,6 +45,8 @@ export class AudioService {
   }
 
   stop(): void {
+    if (!this.audio) return;
+
     this.audio.pause();
     localStorage.setItem('bgMusicPlaying', 'false');
   }
