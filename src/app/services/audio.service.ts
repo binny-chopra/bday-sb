@@ -2,77 +2,83 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AudioService {
   private audio: HTMLAudioElement | null = null;
-  private wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
-  private hasUserInteracted = false;
-  private audioLoaded = false;
+  private isAudioReady = false;
+  private wasPlaying = false;
+  private interactionRegistered = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
-      this.initializeAudio();
+      this.initAudio();
+      this.restorePlaybackState();
     }
   }
 
-  private initializeAudio(): void {
+  private initAudio(): void {
     this.audio = new Audio();
-    this.audio.src = '/assets/audio/thoda_thoda.mp3';
+    this.audio.src = 'assets/audio/thoda_thoda.mp3'; // Relative path
+    this.audio.load(); // Explicitly load audio
     this.audio.loop = true;
     this.audio.volume = 0.5;
-    this.audio.muted = true;
-    this.audio.preload = 'auto';
+    this.audio.muted = true; // Start muted to comply with autoplay policies
 
-    // Wait for audio to be ready
     this.audio.addEventListener('canplaythrough', () => {
-      this.audioLoaded = true;
+      this.isAudioReady = true;
       console.log('Audio is ready to play');
     });
 
-    this.audio.addEventListener('error', (e) => {
-      console.error('Audio error:', e);
+    this.audio.addEventListener('error', (err) => {
+      console.error('Audio error:', err);
     });
-
-    this.setupInteractionListeners();
   }
 
-  private setupInteractionListeners(): void {
-    const handleFirstInteraction = () => {
-      this.hasUserInteracted = true;
-      
-      // Unmute audio if it was playing before
-      if (this.audio && this.wasPlaying) {
-        this.audio.muted = false;
-        this.play().catch(e => console.error('Initial playback failed:', e));
-      }
+  private restorePlaybackState(): void {
+    this.wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
+    if (this.wasPlaying) {
+      this.registerInteractionListener();
+    }
+  }
 
-      // Cleanup listeners after first interaction
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('touchstart', handleFirstInteraction);
-      document.removeEventListener('keydown', handleFirstInteraction);
+  private registerInteractionListener(): void {
+    if (this.interactionRegistered) return;
+    
+    const playAfterInteraction = () => {
+      if (this.audio && this.isAudioReady) {
+        this.audio.muted = false;
+        this.audio.play().catch(e => {
+          console.warn('Autoplay prevented:', e);
+        });
+      }
     };
 
-    // Add multiple interaction listeners
+    // Single interaction listener
+    const handleFirstInteraction = () => {
+      this.interactionRegistered = true;
+      playAfterInteraction();
+      document.removeEventListener('click', handleFirstInteraction);
+    };
+
     document.addEventListener('click', handleFirstInteraction);
-    document.addEventListener('touchstart', handleFirstInteraction);
-    document.addEventListener('keydown', handleFirstInteraction);
   }
 
   public async play(): Promise<void> {
-    if (!this.audio || !this.audioLoaded) {
+    if (!this.audio || !this.isAudioReady) {
       console.warn('Audio not ready to play');
       return;
     }
 
     try {
+      this.registerInteractionListener();
       await this.audio.play();
       this.audio.muted = false;
       localStorage.setItem('bgMusicPlaying', 'true');
       console.log('Audio playback started');
     } catch (error) {
       console.error('Playback failed:', error);
-      // Implement retry logic or user notification
+      // Fallback: Show UI button to let user start playback
     }
   }
 
@@ -81,14 +87,6 @@ export class AudioService {
       this.audio.pause();
       this.audio.currentTime = 0;
       localStorage.setItem('bgMusicPlaying', 'false');
-    }
-  }
-
-  public toggle(): void {
-    if (this.audio?.paused) {
-      this.play();
-    } else {
-      this.stop();
     }
   }
 }
