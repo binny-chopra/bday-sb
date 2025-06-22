@@ -9,29 +9,40 @@ export class AudioService {
   private isAudioReady = false;
   private wasPlaying = false;
   private interactionRegistered = false;
+  private readyPromise: Promise<void>;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
-      this.initAudio();
+      this.readyPromise = this.initAudio();
       this.restorePlaybackState();
+    } else {
+      this.readyPromise = Promise.resolve();
     }
   }
 
-  private initAudio(): void {
-    this.audio = new Audio();
-    this.audio.src = 'assets/audio/thoda_thoda.mp3'; // Relative path
-    this.audio.load(); // Explicitly load audio
-    this.audio.loop = true;
-    this.audio.volume = 0.5;
-    this.audio.muted = true; // Start muted to comply with autoplay policies
+  private async initAudio(): Promise<void> {
+    return new Promise((resolve) => {
+      this.audio = new Audio();
+      this.audio.src = 'assets/audio/thoda_thoda.mp3';
+      this.audio.load();
+      this.audio.loop = true;
+      this.audio.volume = 0.5;
+      this.audio.muted = true;
 
-    this.audio.addEventListener('canplaythrough', () => {
-      this.isAudioReady = true;
-      console.log('Audio is ready to play');
-    });
+      const onReady = () => {
+        this.isAudioReady = true;
+        console.log('Audio is ready to play');
+        resolve();
+      };
 
-    this.audio.addEventListener('error', (err) => {
-      console.error('Audio error:', err);
+      // Use multiple events to ensure readiness
+      this.audio.addEventListener('canplaythrough', onReady);
+      this.audio.addEventListener('loadeddata', onReady);
+      
+      this.audio.addEventListener('error', (err) => {
+        console.error('Audio error:', err);
+        resolve(); // Still resolve to avoid hanging
+      });
     });
   }
 
@@ -54,17 +65,23 @@ export class AudioService {
       }
     };
 
-    // Single interaction listener
     const handleFirstInteraction = () => {
       this.interactionRegistered = true;
       playAfterInteraction();
       document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+      document.removeEventListener('keydown', handleFirstInteraction);
     };
 
+    // Add multiple interaction types
     document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
+    document.addEventListener('keydown', handleFirstInteraction);
   }
 
   public async play(): Promise<void> {
+    await this.readyPromise; // Wait for audio to be ready
+    
     if (!this.audio || !this.isAudioReady) {
       console.warn('Audio not ready to play');
       return;
@@ -78,7 +95,7 @@ export class AudioService {
       console.log('Audio playback started');
     } catch (error) {
       console.error('Playback failed:', error);
-      // Fallback: Show UI button to let user start playback
+      // Consider showing a UI element to let users start playback manually
     }
   }
 
