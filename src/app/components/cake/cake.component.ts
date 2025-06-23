@@ -11,6 +11,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { gsap } from 'gsap';
+import {RIBBON_COLORS, IMAGE_URLS, PHRASES} from '../../utils/constants'
 
 @Component({
   selector: 'app-cake',
@@ -22,61 +23,9 @@ import { gsap } from 'gsap';
 export class CakeComponent implements AfterViewInit, OnDestroy {
   // Constants
   private readonly SCROLL_SPEED = 50; // pixels per second
-  private readonly RIBBON_COLORS = [
-    'linear-gradient(45deg, #FF9ECD, #FF71B6)',
-    'linear-gradient(45deg, #FFB7E0, #FF8AC7)',
-    'linear-gradient(45deg, #FFC4E6, #FFA3D4)',
-    'linear-gradient(45deg, #E0C3FC, #BDE0FE)',
-    'linear-gradient(45deg, #FFCAD4, #FFD1E3)',
-  ];
-  private readonly PHRASES = [
-    'Sugarplum 🍯',
-    'Pookie 🧸',
-    'Sunshine ❤️☀️❤️',
-    'Maryland mei meri hogi 💯🙏',
-    'Teleport ✨✈️',
-    'Treasure in chat 💗',
-    'Vitamin You 🍦',
-    'No comeback 😁',
-    'Oxford dictionary 🏫😂',
-    'Fix my tickets - severity level is infinity 😈',
-    'Goodnight bolne k baad sona hota h 💫💌',
-  ];
-  private readonly IMAGE_URLS = [
-    'assets/images/tiles/tiles001.png',
-    'assets/images/tiles/tiles002.png',
-    'assets/images/tiles/tiles003.jpg',
-    'assets/images/tiles/tiles004.png',
-    'assets/images/tiles/tiles005.png',
-    'assets/images/tiles/tiles006.png',
-    'assets/images/tiles/tiles007.png',
-    'assets/images/tiles/tiles008.jpg',
-    'assets/images/tiles/tiles009.jpg',
-    'assets/images/tiles/tiles010.jpg',
-    'assets/images/tiles/tiles011.jpg',
-    'assets/images/tiles/tiles012.jpg',
-    'assets/images/tiles/tiles013.jpg',
-    'assets/images/tiles/tiles014.jpg',
-    'assets/images/tiles/tiles015.jpg',
-    'assets/images/tiles/tiles016.jpg',
-    'assets/images/tiles/tiles017.jpg',
-    'assets/images/tiles/tiles018.jpg',
-    'assets/images/tiles/tiles019.jpg',
-    'assets/images/tiles/tiles020.jpg',
-    'assets/images/tiles/tiles021.jpg',
-    'assets/images/tiles/tiles022.jpg',
-    'assets/images/tiles/tiles023.jpg',
-    'assets/images/tiles/tiles024.jpg',
-    'assets/images/tiles/tiles025.jpg',
-    'assets/images/tiles/tiles026.jpg',
-    'assets/images/tiles/tiles027.jpg',
-    'assets/images/tiles/tiles028.jpg',
-    'assets/images/tiles/tiles029.jpg',
-    'assets/images/tiles/tiles030.jpg',
-    'assets/images/tiles/tiles031.jpg',
-    'assets/images/tiles/tiles032.jpg',
-    'assets/images/tiles/tiles033.jpg',
-  ];
+  private readonly RIBBON_COLORS = RIBBON_COLORS;
+  private readonly PHRASES = PHRASES;
+  private readonly IMAGE_URLS = IMAGE_URLS;
 
   // View Children
   @ViewChild('scrollingWords') scrollingWords!: ElementRef<HTMLDivElement>;
