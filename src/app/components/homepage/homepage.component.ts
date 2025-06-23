@@ -24,7 +24,7 @@ export class HomepageComponent implements OnInit {
   constructor(private router: Router, private audioService: AudioService) {}
   ngOnInit(): void {
     this.createDecorations();
-    this.audioService.play();
+    this.audioService.playFromTimestamp(67);
   }
 
   createDecorations(): void {

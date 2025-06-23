@@ -26,7 +26,7 @@ export class AudioService {
       this.audio.src = 'assets/audio/thoda_thoda.mp3';
       this.audio.load();
       this.audio.loop = true;
-      this.audio.volume = 0.5;
+      this.audio.volume = 1;
       this.audio.muted = true;
 
       const onReady = () => {
@@ -104,6 +104,28 @@ export class AudioService {
       this.audio.pause();
       this.audio.currentTime = 0;
       localStorage.setItem('bgMusicPlaying', 'false');
+    }
+  }
+
+    public async playFromTimestamp(timestamp: number): Promise<void> {
+    await this.readyPromise; // Wait for audio to be ready
+    
+    if (!this.audio || !this.isAudioReady) {
+      console.warn('Audio not ready to play');
+      return;
+    }
+
+    try {
+      // Set the timestamp before playing
+      this.audio.currentTime = timestamp;
+      
+      this.registerInteractionListener();
+      await this.audio.play();
+      this.audio.muted = false;
+      localStorage.setItem('bgMusicPlaying', 'true');
+      console.log(`Audio playback started from ${timestamp} seconds`);
+    } catch (error) {
+      console.error('Playback failed:', error);
     }
   }
 }
