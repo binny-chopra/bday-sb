@@ -41,7 +41,7 @@ export class BirthdayComponent implements AfterViewInit, OnDestroy {
 
   // Content
   romanticMessage =
-    "Every moment with you is a celebration, but today is especially magical. Here's to another year of love, laughter, and countless beautiful memories together.";
+    "June 27th 🍰 Every moment with you is a celebration, but today is especially magical. Here's to another year of love, laughter, and countless beautiful memories together.";
   birthdayText = 'Happy Birthday, ❤️ Sunny ❤️';
 
   // Heart styles
