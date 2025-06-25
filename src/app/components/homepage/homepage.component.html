@@ -26,25 +26,18 @@
 
     <!-- Decorative elements -->
     <div id="decorations">
-      <div
-        *ngFor="let bubble of bubbles"
-        class="bubble"
-        [ngStyle]="{
+      <div *ngFor="let bubble of bubbles" class="bubble" [ngStyle]="{
           width: bubble.size + 'px',
           height: bubble.size + 'px',
           left: bubble.left + '%',
           'animation-duration': bubble.duration + 's',
           'animation-delay': bubble.delay + 's'
-        }"
-      ></div>
+        }"></div>
     </div>
 
     <!-- Main container -->
-    <div
-      class="glass-container floating"
-      id="messageContainer"
-      (click)="onContainerClick()"
-    >
+    <div class="glass-container floating" id="messageContainer" (click)="onContainerClick()">
+      <p style="color: red; padding-bottom: 10px;">ॐ गणेशाय नमः ᬒᬁ</p>
       <p class="message" [class.hidden]="showSecondMessage">
         ✨ I have something for you... 💫
       </p>
@@ -53,49 +46,25 @@
       </p>
     </div>
 
-    <div
-      class="enter-button"
-      id="enterButton"
-      [style.opacity]="showEnterButton ? 1 : 0"
-      [style.transform]="showEnterButton ? 'translateY(0)' : 'translateY(20px)'"
-    >
+    <div class="enter-button" id="enterButton" [style.opacity]="showEnterButton ? 1 : 0"
+      [style.transform]="showEnterButton ? 'translateY(0)' : 'translateY(20px)'">
       <span>✨</span>
-      <input
-        type="text"
-        id="goldenWordsInput"
-        placeholder="Write 3 golden words..."
+      <input type="text" id="goldenWordsInput" placeholder="Write 3 golden words..."
         class="bg-transparent border-none focus:outline-none text-white placeholder-white text-center w-full"
-        style="background: transparent"
-        [(ngModel)]="goldenWords"
-        (input)="checkGoldenWords()"
-      />
+        style="background: transparent" [(ngModel)]="goldenWords" (input)="checkGoldenWords()" />
       <span>💖</span>
     </div>
 
-    <button
-      id="loveYouMoreBtn"
-      class="enter-button mt-4"
-      [style.display]="showLoveButton ? 'inline-flex' : 'none'"
-      (click)="proceedToNext()"
-    >
+    <button id="loveYouMoreBtn" class="enter-button mt-4" [style.display]="showLoveButton ? 'inline-flex' : 'none'"
+      (click)="proceedToNext()">
       🧿 I love you more 💝
     </button>
 
     <!-- GIF container -->
-    <div
-      class="gif-container"
-      id="gifContainer"
-      [style.opacity]="showGifContainer ? 1 : 0"
-      [style.transform]="
+    <div class="gif-container" id="gifContainer" [style.opacity]="showGifContainer ? 1 : 0" [style.transform]="
         showGifContainer ? 'translateY(0)' : 'translateY(20px)'
-      "
-    >
-      <img
-        src="assets/images/gif_1.gif"
-        alt="Birthday celebration"
-        class="gif-placeholder"
-        id="gifPlaceholder"
-      />
+      ">
+      <img src="assets/images/gif_1.gif" alt="Birthday celebration" class="gif-placeholder" id="gifPlaceholder" />
     </div>
   </div>
 </div>

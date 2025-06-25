@@ -113,11 +113,9 @@ html {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.4) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.4) 0%,
+      transparent 70%);
   opacity: 0;
   transform: scale(0.5);
   transition: all 0.4s ease;
@@ -148,9 +146,11 @@ html {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(1);
   }
@@ -165,6 +165,7 @@ html {
   color: white;
   font-family: "Poppins", sans-serif;
   text-shadow: 0 5px 11px rgba(255, 45, 105, 0.5);
+  text-align: justify;
 }
 
 .next-page-button {
