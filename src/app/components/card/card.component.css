@@ -217,13 +217,11 @@ img {
 .plate:before {
   content: "";
   position: absolute;
-  background: repeating-linear-gradient(
-    -45deg,
-    #9b5de5,
-    #9b5de5 3px,
-    #00f5d4 3px,
-    #00f5d4 6px
-  );
+  background: repeating-linear-gradient(-45deg,
+      #9b5de5,
+      #9b5de5 3px,
+      #00f5d4 3px,
+      #00f5d4 6px);
   width: 7px;
   height: 25px;
   top: -75px;
@@ -279,7 +277,7 @@ img {
 
 .wishes {
   position: relative;
-  top: -200px;
+  top: -260px;
   margin: 25px;
 }
 

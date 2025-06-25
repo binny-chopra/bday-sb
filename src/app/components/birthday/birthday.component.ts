@@ -12,6 +12,7 @@ import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ROMANTIC_MSG, HBD_SUNNY } from '../../utils/constants'
 
 gsap.registerPlugin(TextPlugin);
 
@@ -40,9 +41,8 @@ export class BirthdayComponent implements AfterViewInit, OnDestroy {
   }
 
   // Content
-  romanticMessage =
-    "June 27th 🍰 Every moment with you is a celebration, but today is especially magical. Here's to another year of love, laughter, and countless beautiful memories together.";
-  birthdayText = 'Happy Birthday, ❤️ Sunny ❤️';
+  romanticMessage = ROMANTIC_MSG;
+  birthdayText = HBD_SUNNY;
 
   // Heart styles
   heartStyles = [
@@ -386,9 +386,8 @@ export class BirthdayComponent implements AfterViewInit, OnDestroy {
     heart.innerHTML = `
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" 
-              fill="rgba(255, ${Math.random() * 100}, ${Math.random() * 100}, ${
-      Math.random() * 0.4 + 0.6
-    })"/>
+              fill="rgba(255, ${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 0.4 + 0.6
+      })"/>
       </svg>
     `;
     this.heartsContainer.nativeElement.appendChild(heart);
@@ -636,8 +635,7 @@ class Petal {
     );
     gradient.addColorStop(
       1,
-      `rgba(${this.color.r - 30}, ${this.color.g}, ${this.color.b + 20}, ${
-        this.opacity * 0.7
+      `rgba(${this.color.r - 30}, ${this.color.g}, ${this.color.b + 20}, ${this.opacity * 0.7
       })`
     );
     ctx.fillStyle = gradient;
@@ -708,8 +706,7 @@ class FireworkParticle {
 
     glow.addColorStop(
       0,
-      `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${
-        this.opacity * 0.7
+      `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 0.7
       })`
     );
     glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
@@ -773,7 +770,7 @@ class Firework {
 
       const distance = Math.sqrt(
         Math.pow(this.x - this.destination.x, 2) +
-          Math.pow(this.y - this.destination.y, 2)
+        Math.pow(this.y - this.destination.y, 2)
       );
 
       if (distance < 10 || this.y <= this.destination.y) {
