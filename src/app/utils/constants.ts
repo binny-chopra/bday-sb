@@ -62,6 +62,7 @@ export const ROMANTIC_MSG = `From now on, June 27th will always be a truly speci
   तुम मेरे पास होगे 🧸
   गम बड़ी दूर होगा 🤗
   कहता है जीया मेरा 🧿
+  होगा ज़रूर होगा 💯💝
 Just so you know — I'll always be by your side, no matter what. Even if I block you or go silent, if you ever need me, I'll be there. You will always find me rooting for you. And haan mai block krne k baad bhi chahti hu kahi se aa k mnao, kese? wo aap jaano 😂
   Thank you for listening to all my bak-bak patiently, pr iska ye mtlb nahi hai I forgive you for the times we did not talk, isliye aapko muje mnanae k liye mere saath Hot-choc ☕ peeni pdegi jo aap hi bnaoge pyaar se ❤️, or baaki instructions peete peete btaungi, jb tk mera mann nahi bharta aapko whi krna pdega jo  mai kahungi, hehe.
   Additionally, ye aapka last b'day hai mere bina, iske baad to nahi mnane dungi door door. Chlo chlo aage bado, itni saari baatein krni hai, sb kuch yha thodi likh dungi 🐼 Pookieeee 💌.
