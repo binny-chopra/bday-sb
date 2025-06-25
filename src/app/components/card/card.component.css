@@ -279,6 +279,7 @@ img {
   position: relative;
   top: -260px;
   margin: 25px;
+  text-align: justify;
 }
 
 /* Text styles */
