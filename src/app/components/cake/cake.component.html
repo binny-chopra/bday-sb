@@ -1,25 +1,4 @@
 <div class="main-cake">
-  <!-- Image Sliders -->
-  <div class="slider-container left-slider">
-    <div class="slider-track" #leftSlider [class.loaded]="imagesLoaded">
-      <div class="slider-item-container" *ngFor="let image of imageUrls">
-        <img [src]="image" class="slider-item" (load)="onImageLoad()" [style.opacity]="imagesLoaded ? '1' : '0'"
-          alt="Memory image" />
-        <div class="slider-item-placeholder" *ngIf="!imagesLoaded"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slider-container right-slider">
-    <div class="slider-track" #rightSlider [class.loaded]="imagesLoaded">
-      <div class="slider-item-container" *ngFor="let image of reversedImageUrls">
-        <img [src]="image" class="slider-item" (load)="onImageLoad()" [style.opacity]="imagesLoaded ? '1' : '0'"
-          alt="Memory image" />
-        <div class="slider-item-placeholder" *ngIf="!imagesLoaded"></div>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content -->
   <h1 class="heading">Let's Cut the Cake! 🎂</h1>
   <p class="head2">Make a wish 🙏 and Blow the Candle 🕯️</p>
@@ -61,4 +40,19 @@
   <button class="next-page-button" (click)="goToFinalPage()">
     Greeting with all the ♥️
   </button>
+</div>
+
+<div class="vertical-wrapper left">
+  <div class="item" *ngFor="let url of imageUrls; let i = index"
+    [ngStyle]="{ 'animation-delay': ((90 / imageUrls.length) * (imageUrls.length - i - 1) * -1) + 's' }">
+    <img [src]="url" alt="tile image" />
+  </div>
+</div>
+
+<!-- Right Vertical Slider -->
+<div class="vertical-wrapper right">
+  <div class="item" *ngFor="let url of imageUrls; let i = index"
+    [ngStyle]="{ 'animation-delay': ((90 / imageUrls.length) * (imageUrls.length - i - 1) * -1) + 's' }">
+    <img [src]="url" alt="tile image" />
+  </div>
 </div>
