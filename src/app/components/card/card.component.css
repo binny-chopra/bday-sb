@@ -44,7 +44,7 @@ img {
 .birthdayCard {
   position: relative;
   width: 250px;
-  height: 350px;
+  height: 380px;
   cursor: pointer;
   transform-style: preserve-3d;
   transform: perspective(2500px);
@@ -73,7 +73,7 @@ img {
   position: relative;
   background-color: #fff;
   width: 250px;
-  height: 350px;
+  height: 380px;
   overflow: hidden;
   transform-origin: left;
   box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.13),
@@ -123,7 +123,7 @@ img {
 
 .decorations {
   position: absolute;
-  width: 400px;
+  width: 380px;
   height: 300px;
   border: 3px solid #333 !important;
   border-radius: 50%;
@@ -255,7 +255,7 @@ img {
   position: absolute;
   background-color: #fff;
   width: 250px;
-  height: 350px;
+  height: 380px;
   z-index: -1;
   left: 0;
   top: 0;
