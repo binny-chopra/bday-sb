@@ -57,6 +57,10 @@ img {
     0 10px 100px rgba(0, 0, 0, 0.3);
 }
 
+.birthdayCard:hover .cardInside {
+  z-index: 1;
+}
+
 .birthdayCard:hover .cardFront {
   transform: rotateY(-160deg);
 }
